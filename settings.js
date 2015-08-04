@@ -27,7 +27,14 @@ exports.updateSetting = function(req, res) {
     setting.value = JSON.stringify(req.body)
     setting.save(function (err) {
       if (err) return res.sendStatus(500, err)
-      res.send(200)
+      res.sendStatus(200)
     })
+  })
+}
+
+exports.deleteSetting = function(req, res) {
+  Setting.find({ 'key': req.params.key }).remove(function(err) {
+    if (err) return res.sendStatus(500, err)
+    res.sendStatus(200)
   })
 }
